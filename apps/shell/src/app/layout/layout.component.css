@@ -1,0 +1,17 @@
+.shell-container {
+  display: flex;
+  flex-direction: column;
+  /* padding-top: var(--toolbar-height); */
+  background-color: var(--color-background);
+  min-height: calc(70vh - var(--toolbar-height) - - var(--navbar-height));
+}
+
+.shell-content {
+  /* flex: 1; */
+  padding: var(--sp-md);
+  color: var(--color-accent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

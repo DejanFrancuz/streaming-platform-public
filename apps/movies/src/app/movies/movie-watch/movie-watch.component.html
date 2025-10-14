@@ -1,0 +1,12 @@
+<div *ngIf="movie$ | async as movie" class="mt-10">
+  <video
+  width="1040"
+  height="440"
+  controls
+  autoplay
+  muted
+  >
+  <source src="http://localhost:8080/api/movies/watch/{{ movieId }}?format=mp4" type="video/mp4">
+  </video>
+
+</div>

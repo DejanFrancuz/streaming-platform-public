@@ -1,0 +1,19 @@
+<nav class="pt-[--toolbar-height] bg-surface border-b-2 border-primary">
+      <ul class="flex justify-center items-center p-xs gap-md">
+        <li class="nav-item text-sm font-medium">
+          <a routerLink="/dashboard" routerLinkActive="active">DASHBOARD</a>
+        </li>
+        <li *ngIf="isAdmin"  class="nav-item text-sm">
+          <a routerLink="/users" routerLinkActive="active">MEMBERS</a>
+        </li>
+        <li class="nav-item text-sm">
+          <a routerLink="/movies" routerLinkActive="active">MOVIES</a>
+        </li>
+        <li *ngIf="!person" class="nav-item text-sm">
+          <a routerLink="/auth/create-edit" routerLinkActive="active">REGISTER</a>
+        </li>
+        <li *ngIf="!person" class="nav-item text-sm">
+          <a routerLink="/auth/login" routerLinkActive="active">LOGIN</a>
+        </li>
+      </ul>
+    </nav>

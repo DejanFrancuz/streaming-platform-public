@@ -1,0 +1,8 @@
+::ng-deep .custom-menu {
+  background-color: var(--color-primary) !important;
+  color: var(--color-accent);
+}
+
+.selected-icon {
+  color: var(--color-text);
+}

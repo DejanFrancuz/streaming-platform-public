@@ -1,0 +1,26 @@
+/* Light theme (default) */
+:root {
+  --color-primary: var(--color-primary);
+  --color-accent: var(--color-accent);
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --color-text: var(--color-text);
+
+  --toolbar-height: 100px;
+
+  --btn-padding-x: var(--sp-sm);
+  --btn-padding-y: var(--sp-xs);
+  --btn-radius: 0.375rem;
+  --btn-font-weight: 500;
+  --btn-transition: all 0.2s ease-in-out;
+}
+
+/* Dark theme */
+.dark-theme {
+  --color-primary: #3251a4;
+  --color-accent: #ff5c8d;
+  --color-background: #121212;
+  --color-surface: #1E1E1E;
+  --color-text: #E0E0E0;
+}
+

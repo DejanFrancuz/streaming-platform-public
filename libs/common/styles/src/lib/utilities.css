@@ -1,0 +1,14 @@
+/* Small devices */
+@media (max-width: 600px) {
+  /* Dodajte stilove za male ekrane ovde */
+}
+
+/* Medium devices */
+@media (max-width: 960px) {
+  /* Dodajte stilove za srednje ekrane ovde */
+}
+
+/* Large devices */
+@media (max-width: 1280px) {
+  /* Dodajte stilove za velike ekrane ovde */
+}

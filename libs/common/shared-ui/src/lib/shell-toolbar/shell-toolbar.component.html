@@ -1,0 +1,42 @@
+<header
+  class="flex h-[--toolbar-height] justify-between items-center bg-primary color-surface py-sm px-lg"
+>
+  <div class="text-2xl font-bold">StreamPlatform</div>
+  <div class="flex items-center gap-sm">
+    <span class="material-symbols-outlined">search</span>
+    <span (click)="toggleTheme()" class="material-symbols-outlined cursor-pointer">
+      sunny
+    </span>
+    <span class="material-symbols-outlined relative cursor-pointer"
+    (click)="goToCart()"
+      >shopping_cart
+      <span
+        *ngIf="cartCount$ | async as count"
+        class="absolute -top-4 -right-4 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex justify-center"
+      >
+        {{ count }}
+      </span>
+    </span>
+    <div
+      class="flex flex-col gap-2 overflow-hidden"
+      *ngIf="person$ | async as person"
+    >
+      <ngx-avatars
+        class="cursor-pointer"
+        value="{{ person.username.charAt(0).toUpperCase() }}"
+        (clickOnAvatar)="toggleAvatar()"
+        borderColor="#87BBA2"
+        fgColor="#87BBA2"
+        bgColor="#5D737E"
+        size="35"
+      ></ngx-avatars>
+      <div>
+        <lib-person-dropdown
+          *ngIf="isOpen"
+          (closeDropdown)="closeDropdown()"
+          (goToProfile)="onProfile(person.userId)"
+        ></lib-person-dropdown>
+      </div>
+    </div>
+  </div>
+</header>

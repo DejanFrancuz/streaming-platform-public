@@ -1,0 +1,22 @@
+<div *ngIf="movie">
+    <div class="flex flex-row bg-[var(--color-surface)] justify-between w-96">
+      <div class="w-24 h-40">
+        <img
+          [src]="'http://localhost:8080/' + movie.posterUrl"
+          alt="Poster"
+          class="w-full h-full object-cover rounded-t-md"
+        />
+      </div>
+      <div class="flex flex-col py-4 pr-12 gap-2">
+        <span class="text-lg font-bold">
+          {{ movie.title }} ({{ movie.year }})
+        </span>
+        <span class="text-sm italic">
+          {{ movie.genre }}
+        </span>
+        <span class="mt-8">
+          Price: ${{ movie.price | number:'1.2-2' }}
+        </span>
+      </div>
+    </div>
+  </div>

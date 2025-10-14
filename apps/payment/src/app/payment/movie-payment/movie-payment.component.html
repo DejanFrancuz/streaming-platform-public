@@ -1,0 +1,43 @@
+<div
+  class="flex flex-col gap-10 items-center min-h-screen bg-background text-text"
+>
+  <div *ngIf="movie$ | async as movie; else cart_view">
+    <app-movie-card [movie]="movie"></app-movie-card>
+    <p class="p-6">Total Price = ${{ movie.price | number : '1.2-2' }}</p>
+  </div>
+  <ng-template #cart_view>
+    <div *ngIf="cartMovies$ | async as cartMovies; else no_movies">
+      <div class="flex flex-col gap-4">
+        <app-movie-card
+          *ngFor="let movie of cartMovies"
+          [movie]="movie"
+        ></app-movie-card>
+        <p class="p-6">
+          Total Price = ${{ getTotalPrice(cartMovies) | number : '1.2-2' }}
+        </p>
+      </div>
+    </div>
+  </ng-template>
+  <form
+    id="payment-form"
+    class="flex flex-col w-96 gap-6 py-8 px-2 bg-[var(--color-surface)] rounded text-text"
+  >
+    <div id="card-element" class="bg-[var(--color-background)] p-6 rounded">
+      <!--Stripe.js injects the Payment Element-->
+    </div>
+    <stream-platform-ui-button
+      class="m-auto"
+      id="submit"
+      variant="primary"
+      (buttonPressed)="handleSubmit($event)"
+    >
+      <div class="spinner hidden" id="spinner"></div>
+      <span id="button-text">Pay now</span>
+    </stream-platform-ui-button>
+    <div id="payment-message" class="hidden"></div>
+  </form>
+</div>
+
+<ng-template #no_movies>
+  <p>Your cart is empty</p>
+</ng-template>

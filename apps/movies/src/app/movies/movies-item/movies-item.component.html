@@ -1,0 +1,37 @@
+<div *ngIf="movieItem"
+  class="flex flex-col bg-[var(--color-surface)] justify-center items-center w-36 h-60 shadow-md rounded-md
+  transition-transform duration-300 transform hover:scale-105"
+>
+  <div class="relative mt-0 w-36 h-48 group">
+    <img
+      [src]="'http://localhost:8080/' + movieItem.posterUrl"
+      alt="Poster"
+      class="w-full h-full object-cover rounded-t-md"
+    />
+
+    <div
+    class="absolute bottom-0 left-0 right-0 bg-black/60 w-full flex flex-row justify-between items-center py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+  >
+    <span (click)="onLikeMovie()" class="material-symbols-outlined text-sm cursor-pointer" [ngClass]="{'text-red-500': isLiked}">favorite</span>
+    <span (click)="onViewMovie()" class="material-symbols-outlined text-sm cursor-pointer">visibility</span>
+    <span *ngIf="!isMyPage; else watchAction"  (click)="isAdmin ? onDeleteMovie() : onBuyMovie()"
+    class="material-symbols-outlined text-sm cursor-pointer">{{isAdmin ? 'delete' : 'shopping_cart' }}</span>
+
+    <ng-template #watchAction>
+        <button (click)="onWatchMovie()"
+    class="material-symbols-outlined text-sm cursor-pointer">play_circle</button>
+
+
+    </ng-template>
+  </div>
+  </div>
+
+  <span #titleRef class="truncate max-w-32 text-sm pt-2 cursor-default" [matTooltip]="movieItem.title"
+  matTooltipShowDelay="500" [matTooltipDisabled]=" !isTextOverflowing(titleRef)"
+  >
+    {{ movieItem.title }}</span
+  >
+  <span class="text-xs italic pb-1 cursor-default">
+     ({{ movieItem.year }})
+  </span>
+</div>

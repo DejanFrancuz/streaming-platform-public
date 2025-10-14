@@ -1,0 +1,41 @@
+<!-- <div *ngIf="!submitted; else spinner"> -->
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()"
+  class="flex items-center justify-center bg-[var(--color-background)]"
+>
+  <div class="bg-[var(--color-surface)] p-8 rounded-xl shadow-lg w-full max-w-md space-y-6">
+    <h2 class="text-2xl font-semibold text-center text-[var(--color-text)]">Prijava</h2>
+
+    <div class="space-y-4">
+      <input
+        formControlName="email"
+        placeholder="email"
+        type="username"
+        class="w-full border p-3 rounded focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+      />
+
+      <input
+        formControlName="password"
+        placeholder="Lozinka"
+        type="password"
+        class="w-full border p-3 rounded focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+      />
+    </div>
+
+    <div class="flex justify-end space-x-4 pt-4">
+      <stream-platform-ui-button
+        variant="primary"
+        [disabled]="loginForm.invalid"
+      >
+        Log in
+      </stream-platform-ui-button>
+    </div>
+  </div>
+</form>
+<!-- </div> -->
+
+<!-- <ng-template #spinner>
+    <mat-spinner strokeWidth="5" diameter="50" strokeWidth="5"></mat-spinner>
+</ng-template> -->
+

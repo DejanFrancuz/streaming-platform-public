@@ -1,0 +1,74 @@
+<div *ngIf="movie">
+  <div class="flex flex-row justify-around gap-12">
+    <div class="flex flex-col w-96 pt-8">
+      <form [formGroup]="movieForm">
+        <input
+          type="text"
+          formControlName="title"
+          [readOnly]="!isAdmin"
+          [ngClass]="isAdmin ? 'cursor-pointer' : 'cursor-default'"
+          class="text-2xl font-bold mb-2 outline-none bg-transparent focus:border-b-2 focus:border-accent"
+        />
+        <div class="flex flex-row pl-4 mb-6 gap-3">
+          <input
+            type="text"
+            formControlName="year"
+            maxlength="4"
+            [readOnly]="!isAdmin"
+            [ngClass]="isAdmin ? 'cursor-pointer' : 'cursor-default'"
+            class="w-8 text-xs outline-none border-b border-text bg-transparent focus:border-b-2 focus:border-accent"
+          />
+          <input
+            type="text"
+            formControlName="genre"
+            [readOnly]="!isAdmin"
+            [ngClass]="isAdmin ? 'cursor-pointer' : 'cursor-default'"
+            class="text-xs italic outline-none font-bold bg-transparent focus:border-b-2 focus:border-accent"
+          />
+        </div>
+        <span class="pl-2 cursor-default">• • •</span>
+        <textarea
+          formControlName="description"
+          [maxLength]="300"
+          rows="6"
+          [readOnly]="!isAdmin"
+          [ngClass]="isAdmin ? 'cursor-pointer' : 'cursor-default'"
+          class="w-full resize-none outline-none overflow-hidden bg-transparent p-2 focus:border-l-2 focus:border-accent"
+        ></textarea>
+      </form>
+    </div>
+    <div class="flex flex-col items-end justify-start relative gap-4 mt-8 w-72 h-96">
+      <img
+        [src]="'http://localhost:8080/' + movie.posterUrl"
+        alt="Poster"
+        class="w-full h-full object-cover"
+      />
+      <stream-platform-ui-button
+        *ngIf="isAdmin"
+        variant="primary"
+        (buttonPressed)="onWatch()"
+      > Watch
+      </stream-platform-ui-button>
+    </div>
+  </div>
+  <div class="flex flex-row items-center justify-between py-32">
+    <stream-platform-ui-button variant="danger" (buttonPressed)="onBack()">
+      Back
+    </stream-platform-ui-button>
+
+    <div class="flex gap-4">
+      <stream-platform-ui-button
+        variant="danger"
+        (buttonPressed)="isAdmin ? onDelete() : onCart()"
+      >
+        {{ isAdmin ? 'Delete' : 'Add to Cart' }}
+      </stream-platform-ui-button>
+      <stream-platform-ui-button
+        variant="primary"
+        (buttonPressed)="isAdmin ? onUpdate() : onBuy()"
+      >
+        {{ person?.permissions?.includes('ADMIN') ? 'Edit' : 'Buy' }}
+      </stream-platform-ui-button>
+    </div>
+  </div>
+</div>

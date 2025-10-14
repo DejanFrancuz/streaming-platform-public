@@ -1,0 +1,22 @@
+.dropdown-menu {
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  list-style: none;
+  width: 150px;
+  border-radius: 4px;
+
+  li a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--color-text);
+    font-size: small;
+    font-weight: 600;
+    background-color: var(--color-primary);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  li a:hover {
+    background-color: #f0f0f0;
+  }
+}

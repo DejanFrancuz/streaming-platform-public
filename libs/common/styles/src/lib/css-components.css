@@ -1,0 +1,25 @@
+button[appButton] {
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  border-radius: var(--btn-radius);
+  border: none;
+  cursor: pointer;
+  color: var(--color-accent);
+  font-weight: var(--btn-font-weight);
+  transition: var(--btn-transition);
+}
+
+button[appButton][variant='primary'] {
+  background-color: var(--color-text);
+}
+
+button[appButton][variant='danger'] {
+  background-color: var(--color-primary);
+}
+
+button[appButton][variant='success'] {
+  background-color: var(--color-btn-success);
+}
+
+button[appButton]:hover {
+  opacity: 0.85;
+}

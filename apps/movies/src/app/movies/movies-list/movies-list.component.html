@@ -1,0 +1,131 @@
+<div class="w-[44rem] flex justify-between items-end mb-4">
+  <mat-tab-group [(selectedIndex)]="selectedTabIndex" class="w-fit">
+    <mat-tab class="font-semibold" [label]= "isAdmin ? 'All Movies' : 'Shop Movies'"></mat-tab>
+    <mat-tab *ngIf="!isAdmin"  class="font-semibold" label="My Movies"></mat-tab>
+  </mat-tab-group>
+
+  <div class="flex flex-col">
+    <div class="flex gap-4 items-center pr-1 pl-6 pb-1">
+      <span
+      (click)="resetFilter()"
+      title="Reset"
+      class="material-symbols-outlined text-base cursor-pointer">
+        filter_alt
+      </span>
+      <span
+      (click)="filterByLike()"
+      [ngClass]="{'selected-icon': filter.like}"
+      title="Filter by Like"
+      class="material-symbols-outlined text-lg cursor-pointer">
+        favorite
+      </span>
+      <span class="material-symbols-outlined text-lg cursor-pointer"
+      title="Filter by decade"
+      [matMenuTriggerFor]="dateMenu"
+      [ngClass]="{'selected-icon': filter.decade}"
+        aria-label="Filter by decade">
+        calendar_month
+      </span>
+      <span
+        class="material-symbols-outlined text-lg cursor-pointer"
+      title="Filter by genre"
+        [matMenuTriggerFor]="genreMenu"
+        [ngClass]="{'selected-icon': filter.genre}"
+        aria-label="Filter by genre"
+      >
+        filter_list
+      </span>
+      <span
+      (click)="sortByYear()"
+      [ngClass]="{'selected-icon': filter.sort}"
+      class="material-symbols-outlined text-lg cursor-pointer"
+      title="Sort"
+      >
+        swap_vert
+      </span>
+
+      <mat-menu #genreMenu="matMenu" class="custom-menu">
+        <button
+          mat-menu-item
+          *ngFor="let genre of genres"
+          (click)="filterByGenre(genre)"
+        >
+          {{ genre }}
+        </button>
+      </mat-menu>
+
+      <mat-menu #dateMenu="matMenu" class="custom-menu flex flex-row">
+        <button
+          mat-menu-item
+          *ngFor="let date of dates"
+          (click)="filterByDate(date)"
+        >
+          {{ date }}
+        </button>
+      </mat-menu>
+    </div>
+
+    <hr
+      class="h-px border-0 color-[var(--color-accent)] bg-[var(--color-accent)]"
+    />
+  </div>
+</div>
+
+<ng-container class="w-[44rem]" *ngIf="selectedTabIndex === 0">
+  <div
+    class="flex flex-col items-center justify-center"
+    *ngIf="movies$ | async as movies"
+  >
+    <ul class="grid grid-cols-4 gap-10">
+      <li *ngFor="let movie of movies.content">
+        <app-movies-item
+          [movieItem]="movie"
+          [isAdmin]="isAdmin"
+          [isLiked]="person?.likedMovies?.includes(movie.movieId) || false"
+          (likeMovie)="likeMovie($event)"
+          (buyMovie)="buyMovieForPerson($event)"
+          (viewMovie)="viewMovie($event)"
+          (deleteMovie)="deleteMovie($event)"
+        >
+        </app-movies-item>
+      </li>
+    </ul>
+    <div class="border border-accent mt-8 rounded">
+    <mat-paginator class="custom-menu rounded"
+      [length]="movies.totalElements"
+      [pageSize]="pagequery.size"
+      [hidePageSize]="true"
+      [showFirstLastButtons]="true"
+      (page)="onPageChange($event)"
+    ></mat-paginator>
+    </div>
+  </div>
+</ng-container>
+<ng-container class="w-[44rem]" *ngIf="selectedTabIndex === 1">
+  <div
+  class="flex flex-col items-center justify-center"
+   *ngIf="myMovies$ | async as myMovies">
+    <ul class="grid grid-cols-4 gap-10">
+      <li *ngFor="let movie of myMovies.content">
+        <app-movies-item
+          [movieItem]="movie"
+          [isMyPage]="true"
+          [isLiked]="person?.likedMovies?.includes(movie.movieId) || false"
+          (likeMovie)="likeMovie($event)"
+          (viewMovie)="viewMovie($event)"
+          (watchMovie)="watchMovie($event)"
+        >
+        </app-movies-item>
+      </li>
+    </ul>
+    <div class="border border-accent mt-8 rounded">
+    <mat-paginator class="custom-menu rounded"
+      [length]="myMovies.totalElements"
+      [pageSize]="pagequery.size"
+      [hidePageSize]="true"
+      [showFirstLastButtons]="true"
+      (page)="onPageChange($event)"
+    ></mat-paginator>
+    </div>
+  </div>
+</ng-container>
